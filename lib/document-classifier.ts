@@ -4,7 +4,7 @@
  * that works well on serverless platforms like Vercel and Netlify
  */
 
-import natural from "natural"
+import { TfIdf, WordTokenizer } from "natural"
 import { removeStopwords, eng } from "stopword"
 
 // Document types and their associated keywords
@@ -19,9 +19,6 @@ const DOCUMENT_TYPES: Record<string, string[]> = {
   certificate: ["certificate", "certify", "awarded", "achievement", "completion", "qualified", "authorized"],
 }
 
-// TF-IDF implementation
-const tfidf = new natural.TfIdf()
-
 /**
  * Classify a document based on its text content
  */
@@ -31,7 +28,7 @@ export function classifyDocument(text: string): {
   possibleTypes: Array<{ type: string; probability: number }>
 } {
   // Tokenize and normalize the text
-  const tokenizer = new natural.WordTokenizer()
+  const tokenizer = new WordTokenizer()
   const tokens = tokenizer.tokenize(text.toLowerCase()) || []
 
   // Remove stopwords
@@ -97,8 +94,8 @@ export function classifyDocument(text: string): {
  * Extract important terms from text
  */
 export function extractImportantTerms(text: string, maxTerms = 10): string[] {
-  // Clear any previous documents
-  tfidf.documents = []
+  // Create a new TfIdf instance
+  const tfidf = new TfIdf()
 
   // Add the document
   tfidf.addDocument(text)
