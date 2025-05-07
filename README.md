@@ -1,6 +1,6 @@
 ### Complete File-by-File Explanation of DocuDigitize OCR Website
 
-Here's a comprehensive explanation of all files in your OCR website project, organized by directories:
+Here's a comprehensive explanation of all files in our OCR website project, organized by directories:
 
 ## Configuration Files
 
