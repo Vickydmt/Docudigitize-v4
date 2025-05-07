@@ -182,7 +182,28 @@ export function VoiceAssistant() {
       if (!isMuted) speakResponse(helpResponse)
     }
     // New commands
-    else if (lowerCommand.includes("mute") || lowerCommand.includes("stop speaking")) {
+    else if (lowerCommand.includes("login with test user") || lowerCommand.includes("test user login")) {
+      setResponse("Logging in with test user account")
+      if (!isMuted) speakResponse("Logging in with test user account")
+
+      // Set test user data in localStorage
+      localStorage.setItem("isLoggedIn", "true")
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          id: "test-user-123",
+          name: "Test User",
+          email: "test@example.com",
+          role: "user",
+        }),
+      )
+
+      // Dispatch custom event for header to update
+      window.dispatchEvent(new Event("auth-change"))
+
+      // Redirect to dashboard
+      router.push("/dashboard")
+    } else if (lowerCommand.includes("mute") || lowerCommand.includes("stop speaking")) {
       setIsMuted(true)
       setResponse("Voice responses muted")
       // Don't speak this response since we're muting
