@@ -1,0 +1,336 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Fix for mobile view stability */
+header {
+  width: 100%;
+  z-index: 50;
+  background-color: hsl(var(--background));
+  border-bottom: 1px solid hsl(var(--border));
+  height: 4rem;
+  display: flex;
+  align-items: center;
+}
+
+main {
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Select component fixes */
+[data-radix-select-viewport] {
+  max-height: 300px !important;
+  overflow-y: auto !important;
+}
+
+/* Fix for select dropdown visibility */
+[data-radix-popper-content-wrapper] {
+  z-index: 9999 !important;
+}
+
+/* Ensure select content is visible */
+.SelectContent {
+  overflow: hidden;
+  background-color: hsl(var(--popover));
+  border-radius: var(--radius);
+  border: 1px solid hsl(var(--border));
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+}
+
+/* Prevent content jumping */
+.TabsContent {
+  min-height: 300px;
+  position: relative;
+  height: auto !important;
+}
+
+/* Tabs list fixes */
+[role="tablist"] {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  position: sticky;
+  top: 4rem;
+  z-index: 10;
+  background-color: hsl(var(--background));
+}
+
+[role="tablist"]::-webkit-scrollbar {
+  display: none;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  /* Fix for mobile menu */
+  .mobile-menu {
+    position: fixed;
+    top: 4rem;
+    left: 0;
+    right: 0;
+    background-color: hsl(var(--background));
+    border-bottom: 1px solid hsl(var(--border));
+    z-index: 40;
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
+  }
+
+  /* Fix for mobile content */
+  .container {
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    max-width: 100%;
+  }
+
+  /* Ensure cards don't overflow on mobile */
+  .card {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  /* Fix for mobile tabs */
+  [role="tablist"] {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0.5rem;
+  }
+
+  [role="tablist"]::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Ensure buttons don't overflow */
+  button {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Fix for document detail page buttons */
+  .document-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .document-actions button {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Fix for document detail page on mobile */
+  .document-detail-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .document-detail-header h1 {
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+  }
+
+  /* Fix for document cards on mobile */
+  .document-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Fix for document preview on mobile */
+  .document-preview {
+    height: 300px;
+  }
+
+  /* Fix for translation view on mobile */
+  .translation-container {
+    flex-direction: column;
+  }
+
+  /* Fix for select dropdowns on mobile */
+  [data-radix-popper-content-wrapper] {
+    position: fixed !important;
+    top: auto !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    transform: none !important;
+    max-height: 50vh !important;
+    z-index: 9999 !important;
+    border-top-left-radius: var(--radius) !important;
+    border-top-right-radius: var(--radius) !important;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  /* Make select content full width on mobile */
+  [data-radix-select-content] {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 0 !important;
+    border-top-left-radius: var(--radius) !important;
+    border-top-right-radius: var(--radius) !important;
+  }
+
+  /* Improve mobile form layout */
+  .space-y-6 > div {
+    margin-bottom: 1.5rem;
+  }
+
+  /* Better mobile button spacing */
+  .flex-col > .w-full {
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* Fix for document preview */
+.document-preview {
+  height: 400px;
+  min-height: 400px;
+  position: relative;
+  overflow: hidden;
+  background-color: hsl(var(--muted));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Fix for document content */
+.document-content {
+  min-height: 300px;
+  height: auto !important;
+  overflow-y: auto;
+  word-break: break-word;
+}
+
+/* Fix for file uploader */
+.file-uploader {
+  min-height: 200px;
+  border: 2px dashed hsl(var(--border));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.file-uploader:hover {
+  border-color: hsl(var(--primary));
+}
+
+/* Fix for processing animation */
+.processing-animation {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Improve file name display */
+.file-name-container {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+/* Animations */
+.animate-in {
+  animation-duration: 500ms;
+  animation-fill-mode: both;
+}
+
+.fade-in {
+  animation-name: fadeIn;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Transitions */
+a,
+button,
+input,
+select,
+textarea {
+  transition: all 0.2s ease-in-out;
+}
