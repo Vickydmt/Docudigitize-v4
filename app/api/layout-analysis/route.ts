@@ -1,6 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { analyzeLayout, visualizeLayout } from "@/lib/layout-analyzer"
-import { classifyDocument, extractMetadata } from "@/lib/document-classifier"
 import { uploadToStorage } from "@/lib/supabase-storage"
 
 export async function POST(request: NextRequest) {
