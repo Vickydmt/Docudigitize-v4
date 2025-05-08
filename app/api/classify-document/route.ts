@@ -1,5 +1,4 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { classifyDocument, extractMetadata } from "@/lib/document-classifier-simple"
 
 export async function POST(request: NextRequest) {
   try {
