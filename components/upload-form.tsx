@@ -864,7 +864,7 @@ ${extractedText}`
                     </CardContent>
                     <div className="p-4 border-t flex justify-between items-center">
                       <div className="text-sm text-muted-foreground">
-                        Confidence: <span className="font-medium">92%</span>
+                        Confidence: <span className="font-medium">82%</span>
                       </div>
                       <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                         <Button
