@@ -1,27 +1,29 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { classifyDocument } from "@/lib/document-classifier"
+import { classifyDocument, extractMetadata } from "@/lib/document-classifier-simple"
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json()
-    const { text } = body
+    const { text } = await request.json()
 
-    if (!text) {
-      return NextResponse.json({ error: "No text provided" }, { status: 400 })
+    if (!text || typeof text !== "string") {
+      return NextResponse.json({ error: "Invalid request. Text is required." }, { status: 400 })
     }
 
     // Classify the document
-    const { documentType, confidence, possibleTypes } = classifyDocument(text)
+    const classification = classifyDocument(text)
+
+    // Extract metadata
+    const metadata = extractMetadata(text)
 
     return NextResponse.json({
-      documentType,
-      confidence,
-      possibleTypes,
+      classification,
+      metadata,
+      success: true,
     })
   } catch (error) {
-    console.error("Error in document classification:", error)
+    console.error("Error classifying document:", error)
     return NextResponse.json(
-      { error: "Failed to classify document", documentType: "unknown", confidence: 0 },
+      { error: "Failed to classify document", details: (error as Error).message },
       { status: 500 },
     )
   }
