@@ -267,7 +267,7 @@ function getLanguageName(languageCode: string): string {
 }
 
 function getQualityLabel(confidence: number): string {
-  if (confidence >= 90) return "High (90%+)"
+  if (confidence >= 90) return "High (80%+)"
   if (confidence >= 70) return "Medium (70-89%)"
   return "Low (<70%)"
 }
