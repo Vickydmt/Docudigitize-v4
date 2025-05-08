@@ -74,7 +74,7 @@ export default function Home() {
           </div>
           <div className="flex justify-center">
             <img
-              src="/placeholder.svg?height=300&width=400"
+              src="/holder.png?height=300&width=400"
               alt="Document digitization illustration"
               className="rounded-lg shadow-lg"
             />
