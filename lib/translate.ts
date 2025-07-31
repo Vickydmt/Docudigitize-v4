@@ -1,6 +1,6 @@
 export async function translateText(text: string, targetLanguage: string, sourceLanguage = "auto"): Promise<string> {
   try {
-    const apiKey = "AIzaSyA2xoFUwlBNOK112_DwXJy2Pq5Tqlp_7PA" // Your API key
+    const apiKey = "AIzaSyCLVG91jIazGPPi5GEpxiwWqSqXP4MhmFc" // Your API key
 
     const response = await fetch(`https://translation.googleapis.com/language/translate/v2?key=${apiKey}`, {
       method: "POST",
