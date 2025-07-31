@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const GOOGLE_VISION_API_KEY = "AIzaSyA2xoFUwlBNOK112_DwXJy2Pq5Tqlp_7PA"
+const GOOGLE_VISION_API_KEY = "AIzaSyCLVG91jIazGPPi5GEpxiwWqSqXP4MhmFc"
 const GOOGLE_VISION_ENDPOINT = `https://vision.googleapis.com/v1/images:annotate?key=${GOOGLE_VISION_API_KEY}`
 
 // Supported languages for OCR
